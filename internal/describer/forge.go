@@ -3,7 +3,6 @@ package describer
 import (
 	"archive/zip"
 	"errors"
-	"fmt"
 	"io"
 	"io/fs"
 	"os"
@@ -15,6 +14,7 @@ import (
 // ForgeInfo contains info about forge mod file.
 type ForgeInfo struct {
 	Sources struct {
+		MetaInfModsToml models.MetaInfModsTomlV1 `json:"META-INF/mods.toml"`
 	} `json:"sources"`
 }
 
@@ -48,7 +48,7 @@ func DescribeForge(file *os.File) (*ForgeInfo, error) {
 		return nil, err
 	}
 
-	fmt.Println(metaInfModsTomlV1)
+	info.Sources.MetaInfModsToml = metaInfModsTomlV1
 
 	return &info, nil
 }
