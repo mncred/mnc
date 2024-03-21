@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/mncred/mnc/cmd/describe"
+	cmdinit "github.com/mncred/mnc/cmd/init"
 )
 
 //go:embed help.txt
@@ -21,6 +22,7 @@ func Register() *cobra.Command {
 	}
 
 	cmd.AddCommand(describe.Register())
+	cmd.AddCommand(cmdinit.Register())
 
 	return cmd
 }
