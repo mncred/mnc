@@ -7,7 +7,7 @@ import (
 )
 
 // FabricModJsonV1 describes fabric.mod.json
-// https://fabricmc.net/wiki/documentation:fabric_mod_json
+// Spec: https://fabricmc.net/wiki/documentation:fabric_mod_json
 type FabricModJsonV1 struct {
 	// SchemaVersion - Needed for internal mechanisms. Must always be 1.
 	SchemaVersion int `json:"schemaVersion"`
@@ -76,11 +76,11 @@ type FabricModJsonV1 struct {
 }
 
 // DeserializeJSON unmarshals file.
-func (f *FabricModJsonV1) DeserializeJSON(data []byte) error {
+func (f *FabricModJsonV1) Unmarshal(data []byte) error {
 	return json.Unmarshal(data, f)
 }
 
 // SerializeJSON marshals file.
-func (f FabricModJsonV1) SerializeJSON() ([]byte, error) {
+func (f FabricModJsonV1) AsJSON() ([]byte, error) {
 	return json.MarshalIndent(f, "", "  ")
 }

@@ -35,11 +35,11 @@ type MetaInfModsTomlV1 struct {
 }
 
 // DeserializeTOML unmarshals file.
-func (f *MetaInfModsTomlV1) DeserializeTOML(data []byte) error {
+func (f *MetaInfModsTomlV1) Unmarshal(data []byte) error {
 	return toml.Unmarshal(data, f)
 }
 
 // SerializeJSON marshals file.
-func (f MetaInfModsTomlV1) SerializeJSON() ([]byte, error) {
+func (f MetaInfModsTomlV1) AsJSON() ([]byte, error) {
 	return json.MarshalIndent(f, "", "  ")
 }

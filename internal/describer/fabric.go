@@ -8,7 +8,6 @@ import (
 	"os"
 
 	"github.com/mncred/mnc/internal/describer/models"
-	"github.com/mncred/mnc/internal/describer/zhelper"
 )
 
 // FabricInfo contains info about fabric mod file.
@@ -41,7 +40,7 @@ func DescribeFabric(file *os.File) (*FabricInfo, error) {
 
 	// try find and load fabric.mod.json
 	var fabricModJsonV1 models.FabricModJsonV1
-	if err := zhelper.DeserializeJSON(zFile, &fabricModJsonV1, "fabric.mod.json"); err != nil {
+	if err := UnmarshalZip(zFile, &fabricModJsonV1, "fabric.mod.json"); err != nil {
 		// return nothing if it is not fabric mod file - no fabric signatures
 		if errors.Is(err, fs.ErrNotExist) {
 			return nil, nil

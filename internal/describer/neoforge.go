@@ -10,8 +10,8 @@ import (
 	"github.com/mncred/mnc/internal/describer/models"
 )
 
-// ForgeInfo contains info about forge mod file.
-type ForgeInfo struct {
+// NeoForgeInfo contains info about forge mod file.
+type NeoForgeInfo struct {
 	Sources struct {
 		MetaInfModsToml models.MetaInfModsTomlV1 `json:"META-INF/mods.toml"`
 	} `json:"sources"`
@@ -19,8 +19,8 @@ type ForgeInfo struct {
 
 // DescribeForge tries to describe forge mod.
 // Returns null without errors if no forge signatures found.
-func DescribeForge(file *os.File) (*ForgeInfo, error) {
-	info := ForgeInfo{}
+func DescribeNeoForge(file *os.File) (*NeoForgeInfo, error) {
+	info := NeoForgeInfo{}
 
 	size, err := file.Seek(0, io.SeekEnd)
 	if err != nil {
@@ -49,16 +49,16 @@ func DescribeForge(file *os.File) (*ForgeInfo, error) {
 	info.Sources.MetaInfModsToml = metaInfModsTomlV1
 
 	// check for dependencies, at least one of them must have dependency from forge
-	forgeDepFound := false
+	neoForgeDepFound := false
 	for _, mod := range info.Sources.MetaInfModsToml.Mods {
 		for _, dep := range info.Sources.MetaInfModsToml.Dependencies[mod.ModId] {
-			if dep.ModId == "forge" {
-				forgeDepFound = true
+			if dep.ModId == "neoforge" {
+				neoForgeDepFound = true
 			}
 		}
 	}
 	// no forge signatures found
-	if !forgeDepFound {
+	if !neoForgeDepFound {
 		return nil, nil
 	}
 
