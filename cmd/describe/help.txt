@@ -1,2 +1,2 @@
-Describes any Minecraft related file.
+Describes any Minecraft related file
 Generally it designed to identify .jar files of mods and plugins.

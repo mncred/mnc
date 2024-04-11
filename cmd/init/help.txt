@@ -1,0 +1,5 @@
+Prepare current directory for use with mnc
+It will create mnc.yml in the root of the current dir.
+
+The mnc.yml file is required to store info about managed assets (mods, plugins, shaders, etc.).
+The mnc.yml is similar to package.json or go.mod file with all set of dependencies of the current project.
